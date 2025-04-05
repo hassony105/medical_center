@@ -1,0 +1,21 @@
+{% extends 'index.html' %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+{% block content %}
+    <form method="post">
+        <div class="complete-appointment">
+            {% csrf_token %}
+            {{ form.note }}
+            <input type="hidden" name="is_done" value="True">
+            <button class="button" type="submit">حفظ</button>
+        </div>
+    </form>
+{% endblock %}
+</body>
+</html>

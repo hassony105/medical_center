@@ -1,0 +1,36 @@
+{% extends 'index.html' %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+{% block content %}
+    <div class="note">
+        <div>
+            <h3><span>الاسم:  </span>{{ appointment.name }}</h3>
+        </div>
+        <div>
+            <h3><span>رقم الهاتف:  </span>{{ appointment.phone }}</h3>
+        </div>
+        <div>
+            <h3><span>الطبيب المختص:  </span>{{ appointment.doctor }}</h3>
+        </div>
+        <div>
+            <h3><span>العمر:  </span>{{ appointment.age }}</h3>
+        </div>
+        <div>
+            <h3><span>الجنس:  </span>{{ appointment.gender }}</h3>
+        </div>
+        <div>
+            <h3>{{ appointment.datetime }}<span>  :تاريخ الحجز</span></h3>
+        </div>
+        <div>
+            <h3><span>الملاحضات:  </span>{{ appointment.note }}</h3>
+        </div>
+    </div>
+{% endblock %}
+</body>
+</html>

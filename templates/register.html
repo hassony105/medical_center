@@ -1,0 +1,41 @@
+{% extends 'index.html' %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+{% block content %}
+    <form action="" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div style="display:flex; flex-direction: row-reverse">
+            <div class="register-page">
+            {{ form.name }}
+            {{ form.specialty }}
+            {{ form.email }}
+            {{ form.password1 }}
+            {{ form.password2 }}
+            <div>
+                <div>
+                    {{ form.is_superuser }}
+                    <label for="id_is_superuser">ادمن</label>
+                </div>
+                <div>
+                    {{ form.is_doctor }}
+                    <label for="id_is_doctor">طبيب</label>
+                </div>
+            </div>
+            <div>
+                <label for="id_image">اختر صوره</label>
+                {{ form.image }}
+            </div>
+        <button class="button" type="submit">حفظ</button>
+        </div>
+            <img src="/static/img/sign%20up.png" alt="" style="width: 40%;height: 40%">
+        </div>
+    </form>
+{% endblock %}
+</body>
+</html>

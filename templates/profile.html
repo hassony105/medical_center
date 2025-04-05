@@ -1,0 +1,48 @@
+{% extends 'index.html' %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+{% block content %}
+    <div style="min-height: 35vmax">
+    <div class="my-appointment-buttons">
+        <button class="my-appointment-buttons button" onclick="getDoneAppointmentsButton()">المواعيد المنجزة</button>
+        <button class="my-appointment-buttons button" onclick="getUndoneAppointmentsButton()">المواعيد غير المنجزة</button>
+    </div>
+    <table class="my-appointments-page">
+            <tr class="app-item">
+                {% if not is_done %}
+                    <th>تحديد كتامة</th>
+                {% else %}
+                    <th>الملاحظات</th>
+                {% endif %}
+                <th>الموعد</th>
+                <th>رقم الهاتف</th>
+                <th>العمر</th>
+                <th>الجنس</th>
+                <th>الاسم</th>
+            </tr>
+        {% for appointment in appointments %}
+            <tr>
+                {% if not is_done %}
+                    <td><a class="my-appointments-page a" href={% url 'done' appointment.id%}>اتمام</a></td>
+                {% else %}
+                    <td><a class="my-appointments-page a" href="{% url 'note' appointment.id%}">عرض</a></td>
+                {% endif %}
+                <td>{{ appointment.datetime }}</td>
+                <td>{{ appointment.phone }}</td>
+                <td>{{ appointment.age }}</td>
+                <td>{{ appointment.gender }}</td>
+                <td>{{ appointment }}</td>
+            </tr>
+        {% endfor %}
+        </table>
+    </div>
+    <script src={% static 'js/script.js' %}></script>
+{% endblock %}
+</body>
+</html>

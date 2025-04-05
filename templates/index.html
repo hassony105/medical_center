@@ -1,0 +1,85 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Medical Center</title>
+    <link rel="stylesheet" href={% static 'css/style.css' %}>
+</head>
+<body>
+    <nav>
+        <div class="container">
+            <ul>
+                <div>
+                    {% if user.is_authenticated %}
+                        {% if user.is_superuser %}
+                            <li><a class="button" href="{% url 'signup' %}">اضافة حساب</a></li>
+                        {% endif %}
+                    <li><a href="{% url 'profile' %}?done=0">حسابي</a></li>
+                    {% else %}
+                        <li><a href="{% url 'login' %}">تسحيل دخول</a></li>
+                    {% endif %}
+                </div>
+                <div>
+                    <li><a href="{% url 'about' %}">حول</a></li>
+                    <li><a href="{% url 'appointments' %}">المواعيد</a></li>
+                    <li><a href="{% url 'doctors' %}?d=5">الاطباء</a></li>
+                    <li><a href="{% url 'home' %}">الصفحة الرئيسية</a></li>
+                </div>
+            </ul>
+        </div>
+    </nav>
+    {#<main>#}
+    {% block content %}
+        <div class="main_section">
+            <div>
+            <h1 class="hello_text">نحن نقدم استشارة عالية الجودة مع أفضل الأطباء لدينا</h1>
+            <div>
+            <a class="button" href="{% url 'about' %}">اقرء اكثر</a>
+            <a class="button" href="{% url 'doctors' %}">بحث عن دكتور</a>
+            </div>
+            </div>
+            <img src="../static/img/welcome.png" alt="" class="img">
+        </div>
+        <div class="suggested_section">
+            <h3 style="color: white">الاطباء المقترحون</h3>
+            <ul class="suggested_section div">
+                {% for doctor in doctors %}
+                    <li class="doctor">
+                        <img class="doc_img" src="{{ doctor.image }}" alt="">
+                        <h2>{{ doctor.name }}</h2>
+                        <h3>{{ doctor.specialty }}</h3>
+                        <a class="button" href="{% url 'appointments' %}?doctor_id={{ doctor.id }}">احجز موعداً</a>
+                    </li>
+                {% endfor %}
+            </ul>
+            <a class="button_inv" href="{% url 'doctors' %}">عرض المزيد</a>
+        </div>
+        <div class="about_section">
+            <h3>عنا</h3>
+            <div class="about_section div">
+                <img class="group_doc_img" src="../static/img/group%20doctor.png" alt="">
+                <h2>نعتقد أن الرعاية الصحية هي أكثر من مجرد علاج الأعراض ؛ يتعلق الأمر بمعالجة الأسباب الكامنة وراء المرض وتعزيز العافية بشكل عام. لهذا السبب نقدم مجموعة من الخدمات ، بما في ذلك الرعاية الوقائية والاختبارات التشخيصية والعلاجات والإجراءات المتقدمة.</h2>
+            </div>
+        </div>
+    {% endblock %}
+    <footer class="footer">
+        <h1>العراق, بابل<br> الحلة, شارع 40</h1>
+        <div class="footer-info">
+            <div class="footer-social">
+              <img src="../static/img/facebook.png" alt="facebook">
+              <img src="../static/img/instagram.png" alt="instagram">
+              <img src="../static/img/telegram.png" alt="telegram">
+              <img src="../static/img/twitter.png" alt="twitter">
+            </div>
+        </div>
+        <div class="footer-info">
+            <h2>تواصل معنا</h2>
+            <p>example@mail.com</p>
+            <p>07801234567</p>
+        </div>
+    </footer>
+    {#    <p>Here you can find all the information you need about our services.</p>#}
+{#</main>#}
+</body>
+</html>
